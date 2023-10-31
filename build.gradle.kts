@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.0"
+    application
 }
 
 group = "net.maiatoday"
@@ -18,5 +19,9 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(20)
+    jvmToolchain(17)
+}
+
+application {
+    mainClass = "net.maiatoday.forestwalk.MainKt"
 }
