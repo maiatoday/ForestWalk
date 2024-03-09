@@ -4,12 +4,12 @@ import java.awt.Color
 import kotlin.random.Random
 import kotlin.math.*
 
-fun randomColor(): Color {
+fun randomColor(alpha: Int = 255): Color {
     val colorRange = 0..255
     val r = colorRange.random()
     val g = colorRange.random()
     val b = colorRange.random()
-    return Color(r, g, b)
+    return Color(r, g, b, alpha)
 }
 
 fun randomGrey(): Color {
