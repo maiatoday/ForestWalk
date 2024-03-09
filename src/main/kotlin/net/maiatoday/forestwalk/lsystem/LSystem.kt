@@ -29,40 +29,45 @@ fun drawLSystem(lsystem: String, iterations: Int): BufferedImage {
     val stack = mutableListOf<Segment>()
     var segment = Segment(width / 2.0, 0.9 * height, -Math.PI / 2)
     var length = initialLength
-
     val bufferedImage = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
     val g2d = bufferedImage.createGraphics()
     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
     g2d.color = Color.BLACK
     g2d.fillRect(0, 0, width, height)
     g2d.color = Color.GREEN
+    lsystem.forEach { c -> segment = drawSegment(c, segment, stack, angleChange, lengthDecreaseFactor, g2d, length) }
+    g2d.dispose()
+    return bufferedImage
+}
 
-    lsystem.forEach {
-        when (it) {
-            'F' -> {
-                val newX = segment.x + length * Math.cos(segment.angle)
-                val newY = segment.y + length * Math.sin(segment.angle)
-                g2d.drawLine(segment.x.toInt(), segment.y.toInt(), newX.toInt(), newY.toInt())
-                segment = Segment(newX, newY, segment.angle)
-            }
+private fun drawSegment(
+    c: Char, segment: Segment, stack: MutableList<Segment>, angleChange: Double,
+    lengthDecreaseFactor: Double, g2d: Graphics2D, length: Double
+): Segment {
+    var newLength = length
+    var newSegment = segment
+    when (c) {
+        'F' -> {
+            val newX = segment.x + length * Math.cos(segment.angle)
+            val newY = segment.y + length * Math.sin(segment.angle)
+            g2d.drawLine(segment.x.toInt(), segment.y.toInt(), newX.toInt(), newY.toInt())
+            newSegment = Segment(newX, newY, segment.angle)
+        }
 
-            '+' -> segment = Segment(segment.x, segment.y, segment.angle - angleChange)
-            '-' -> segment = Segment(segment.x, segment.y, segment.angle + angleChange)
-            '[' -> {
-                stack.add(Segment(segment.x, segment.y, segment.angle))
-                length *= lengthDecreaseFactor
-            }
+        '+' -> newSegment = Segment(segment.x, segment.y, segment.angle - angleChange)
+        '-' -> newSegment = Segment(segment.x, segment.y, segment.angle + angleChange)
+        '[' -> {
+            stack.add(Segment(segment.x, segment.y, segment.angle))
+            newLength *= lengthDecreaseFactor
+        }
 
-            ']' -> {
-                segment = stack.removeAt(stack.size - 1)
-                length /= lengthDecreaseFactor
-            }
+        ']' -> {
+            newSegment = stack.removeAt(stack.size - 1)
+            newLength /= lengthDecreaseFactor
+        }
 
-            else -> {}
+        else -> {
         }
     }
-
-    g2d.dispose()
-    //ImageIO.write(bufferedImage, "png", File("lsystem.png"))
-    return bufferedImage
+    return newSegment
 }
