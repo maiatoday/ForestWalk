@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage
 fun canvas(
     width: Int = 300,
     height: Int = 300,
-    backgroundColour: Color = Color.BLACK,
+    backgroundColour: Color = Color.WHITE,
     block: Graphics2D.(width: Int, height: Int) -> Unit,
 ): BufferedImage {
     val image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)

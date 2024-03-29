@@ -5,19 +5,24 @@ import java.awt.Graphics2D
 import kotlin.math.cos
 import kotlin.math.sin
 
+typealias Degree = Double
+typealias Radian = Double
+fun Degree.toRadian(): Radian = this / 180 * Math.PI
+fun Radian.toDegree(): Degree = this * 180 / Math.PI
 data class State(val x: Int, val y: Int, val length: Int, val angle: Double = 0.0, val colorIndex:Int = 0)
 
 fun Graphics2D.goTortoise(
     penColors: List<Color> = listOf(Color.GREEN),
-    angleChange:Double = Math.PI/3,
+    angleChangeDeg:Degree = 20.0,
     length:Int = 20,
     startX: Int,
     startY: Int,
-    plant: Plant
+    bluePrint: String
 ) {
+    val angleChange = angleChangeDeg.toRadian()
     val stack = ArrayDeque<State>()
     var state = State(startX, startY , length, -Math.PI / 2)
-    plant.bluePrint.forEach { c ->
+    bluePrint.forEach { c ->
         state = when (c) {
             'F', 'f' -> {
                 val newX = state.x + (state.length * cos(state.angle)).toInt()
