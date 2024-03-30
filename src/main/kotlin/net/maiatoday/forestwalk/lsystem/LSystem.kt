@@ -23,8 +23,8 @@ data class State(
 fun Graphics2D.goTortoise(
     penColors: List<Color> = listOf(Color.GREEN),
     angleChangeDeg:Degree = 20.0,
-    startWidth:Float = 10.0f,
-    widthChange:Float = 0.95f,
+    startStroke:Float = 1.0f,
+    strokeChange:Float = 1.0f,
     length:Int = 20,
     startX: Int,
     startY: Int,
@@ -37,7 +37,7 @@ fun Graphics2D.goTortoise(
         y = startY,
         length = length,
         angle = -Math.PI / 2, // upright trees
-        strokeWidth = startWidth
+        strokeWidth = startStroke
     )
     stroke = BasicStroke(state.strokeWidth)
     bluePrint.forEach { c ->
@@ -49,7 +49,7 @@ fun Graphics2D.goTortoise(
                     color = penColors[state.colorIndex]
                     drawLine(state.x, state.y, newX, newY)
                 }
-                state.copy(x = newX, y = newY, strokeWidth = state.strokeWidth*widthChange)
+                state.copy(x = newX, y = newY, strokeWidth = state.strokeWidth*strokeChange)
             }
 
             '+' -> state.copy(angle = state.angle - angleChange)
@@ -73,8 +73,8 @@ fun Graphics2D.goTortoise(
 fun Graphics2D.goSquirrel(
     penColors: List<Color> = listOf(Color.GREEN),
     angleChangeDeg:Degree = 20.0,
-    startWidth:Float = 10.0f,
-    widthChange:Float = 0.95f,
+    startStroke:Float = 1.0f,
+    strokeChange:Float = 1.0f,
     length:Int = 20,
     startX: Int,
     startY: Int,
@@ -87,7 +87,7 @@ fun Graphics2D.goSquirrel(
         y = startY,
         length = length,
         angle = -Math.PI / 2, // upright trees
-        strokeWidth = startWidth
+        strokeWidth = startStroke
     )
     stroke = BasicStroke(state.strokeWidth)
     bluePrint.forEach { c ->
@@ -100,7 +100,7 @@ fun Graphics2D.goSquirrel(
                     color = penColors[state.colorIndex]
                     drawLine(state.x, state.y, newX, newY)
                 }
-                state.copy(x = newX, y = newY, strokeWidth = state.strokeWidth*widthChange)
+                state.copy(x = newX, y = newY, strokeWidth = state.strokeWidth*strokeChange)
             }
 
             '+' -> state.copy(angle = state.angle - (angleChange +jitter))
