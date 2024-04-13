@@ -94,11 +94,12 @@ fun Graphics2D.goSquirrel(
         y = startY,
         length = length,
         angle = -Math.PI / 2, // upright trees
-        strokeWidth = startStroke
+        strokeWidth = startStroke,
+        colorIndex = Random.nextInt(0, penColors.size-1)
     )
     stroke = BasicStroke(state.strokeWidth)
     bluePrint.forEach { c ->
-        val jitter = Random.nextDouble(-5.0.toRadian(), 5.0.toRadian())
+        val jitter = Random.nextDouble((-5.0).toRadian(), 5.0.toRadian())
         state = when (c) {
             'F', 'f' -> {
                 val newX = state.x + (state.length * cos(state.angle)).toInt()
@@ -107,7 +108,12 @@ fun Graphics2D.goSquirrel(
                     color = penColors[state.colorIndex]
                     drawLine(state.x, state.y, newX, newY)
                 }
-                state.copy(x = newX, y = newY, strokeWidth = state.strokeWidth * strokeChange)
+                state.copy(
+                    x = newX,
+                    y = newY,
+                    strokeWidth = state.strokeWidth * strokeChange,
+                    colorIndex = (state.colorIndex + 1) % penColors.size
+                )
             }
 
             '+' -> state.copy(angle = state.angle - (angleChange + jitter))
