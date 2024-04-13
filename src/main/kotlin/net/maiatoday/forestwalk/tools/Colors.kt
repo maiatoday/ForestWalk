@@ -2,7 +2,8 @@ package net.maiatoday.forestwalk.tools
 
 import java.awt.Color
 
-val springSky = Color(213, 215, 224)
+val springSky = Color(240, 254, 254)
+val springEarth = Color(121, 120, 119)
 
 val treeShades = listOf(
     Color(136, 118, 95),
@@ -17,14 +18,17 @@ val treeShades = listOf(
 )
 
 val shrubShades = listOf(
-    Color(34, 48, 0),
-    Color(45, 54, 23),
-    Color(116, 127, 31),
     Color(128, 140, 30),
     Color(149, 167, 46),
     Color(147, 159, 76),
     Color(174, 184, 120),
     Color(192, 227, 162),
+)
+
+val darkshrubShades = listOf(
+    Color(34, 48, 0),
+    Color(45, 54, 23),
+    Color(116, 127, 31),
 )
 
 val petalShades = listOf(
@@ -35,5 +39,12 @@ val petalShades = listOf(
     Color(160, 142, 156),
     Color(187, 162, 175),
     Color(255, 238, 253),
+    Color(255, 238, 253),
+    Color(255, 238, 253),
+    Color(255, 238, 253),
+    Color(255, 255, 255),
+    Color(255, 255, 255),
+    Color(255, 255, 255),
+    Color(255, 255, 255),
     Color(255, 255, 255),
 )

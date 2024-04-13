@@ -1,8 +1,8 @@
 package net.maiatoday.forestwalk.tools
 
 import java.awt.Color
-import kotlin.random.Random
 import kotlin.math.*
+import kotlin.random.Random
 
 fun randomColor(alpha: Int = 255): Color {
     val colorRange = 0..255
@@ -18,10 +18,12 @@ fun randomGrey(): Color {
     return Color(c, c, c)
 }
 
+fun randomFrom(colors: List<Color>, alpha: Int = 255): Color = colors[Random.nextInt(0, colors.size - 1)]
+
 data class Point(val x: Int, val y: Int)
 
-fun randomOffset(width: Int, height: Int) =
-    Point(x = Random.nextInt(0, width), y = Random.nextInt(0, height))
+fun randomOffset(startX: Int = 0, width: Int, startY: Int = 0, height: Int) =
+    Point(x = Random.nextInt(startX, width), y = Random.nextInt(startY, height))
 
 fun randomRadius(min: Int = 5, max: Int = 100) = Random.nextInt(min, max)
 

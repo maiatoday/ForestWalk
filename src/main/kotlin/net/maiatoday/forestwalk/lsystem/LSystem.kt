@@ -36,19 +36,22 @@ fun Graphics2D.goTortoise(
     startY: Int,
     bluePrint: String
 ) {
-    val angleChange = angleChangeDeg.toRadian()
     val stack = ArrayDeque<State>()
+    //region start state
+    val angleChange = angleChangeDeg.toRadian()
     var state = State(
         x = startX,
         y = startY,
         length = length,
         angle = -Math.PI / 2, // upright trees
     )
+    //endregion
     bluePrint.forEach { c ->
         state = when (c) {
             'F', 'f' -> {
                 val newX = state.x + (state.length * cos(state.angle)).toInt()
                 val newY = state.y + (state.length * sin(state.angle)).toInt()
+                // The side effect to draw
                 if (c == 'F') {
                     color = penColors[state.colorIndex]
                     drawLine(state.x, state.y, newX, newY)
@@ -78,7 +81,7 @@ fun Graphics2D.goTortoise(
 
 //region the squirrels live here
 fun Graphics2D.goSquirrel(
-    penColors: List<Color> = listOf(Color.GREEN),
+    penColors: List<Color> = listOf(Color.GREEN, Color.GREEN),
     angleChangeDeg: Degree = 20.0,
     startStroke: Float = 1.0f,
     strokeChange: Float = 1.0f,
@@ -87,8 +90,10 @@ fun Graphics2D.goSquirrel(
     startY: Int,
     bluePrint: String
 ) {
-    val angleChange = angleChangeDeg.toRadian()
+
     val stack = ArrayDeque<State>()
+    //region start state
+    val angleChange = angleChangeDeg.toRadian()
     var state = State(
         x = startX,
         y = startY,
@@ -98,12 +103,15 @@ fun Graphics2D.goSquirrel(
         colorIndex = Random.nextInt(0, penColors.size-1)
     )
     stroke = BasicStroke(state.strokeWidth)
+    //endregion
+
     bluePrint.forEach { c ->
         val jitter = Random.nextDouble((-5.0).toRadian(), 5.0.toRadian())
         state = when (c) {
             'F', 'f' -> {
                 val newX = state.x + (state.length * cos(state.angle)).toInt()
                 val newY = state.y + (state.length * sin(state.angle)).toInt()
+                // The side effect to draw
                 if (c == 'F') {
                     color = penColors[state.colorIndex]
                     drawLine(state.x, state.y, newX, newY)
