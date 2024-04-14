@@ -141,6 +141,19 @@ fun Graphics2D.goSquirrel(
         stroke = BasicStroke(state.strokeWidth)
     }
 }
+
+fun Graphics2D.goSquirrel(seedling:Seedling) {
+    goSquirrel(
+        startX = seedling.startX,
+        startY = seedling.startY,
+        angleChangeDeg = seedling.angleChangeDeg,
+        startStroke = seedling.startStroke,
+        strokeChange = seedling.strokeChange,
+        length = seedling.length,
+        bluePrint = seedling.bluePrint,
+        penColors = seedling.colors)
+}
+
 //endregion
 
 
