@@ -18,7 +18,10 @@ fun randomGrey(): Color {
     return Color(c, c, c)
 }
 
-fun randomFrom(colors: List<Color>, alpha: Int = 255): Color = colors[Random.nextInt(0, colors.size - 1)]
+fun randomFrom(colors: List<Color>, alpha: Int = 255): Color {
+    val c =  colors[Random.nextInt(0, colors.size - 1)]
+    return if (alpha == 255) c else Color(c.red, c.green, c.blue, alpha)
+}
 
 data class Point(val x: Int, val y: Int)
 

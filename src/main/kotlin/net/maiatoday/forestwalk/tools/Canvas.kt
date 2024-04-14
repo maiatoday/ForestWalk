@@ -12,7 +12,10 @@ fun canvas(
     startImage: BufferedImage? = null,
     block: Graphics2D.(width: Int, height: Int) -> Unit,
 ): BufferedImage {
-    val image = startImage ?: BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+    val image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+    startImage?.let {
+        image.data = it.raster
+    }
     val graphics = image.createGraphics()
     with(graphics) {
 //        background = backgroundColour
