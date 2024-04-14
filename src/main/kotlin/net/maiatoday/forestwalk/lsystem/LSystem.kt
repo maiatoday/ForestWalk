@@ -100,7 +100,7 @@ fun Graphics2D.goSquirrel(
         length = length,
         angle = -Math.PI / 2, // upright trees
         strokeWidth = startStroke,
-        colorIndex = Random.nextInt(0, penColors.size-1)
+        colorIndex = if (penColors.size > 1) Random.nextInt(0, penColors.size-1) else 0
     )
     stroke = BasicStroke(state.strokeWidth)
     //endregion
@@ -120,7 +120,7 @@ fun Graphics2D.goSquirrel(
                     x = newX,
                     y = newY,
                     strokeWidth = state.strokeWidth * strokeChange,
-                    colorIndex = (state.colorIndex + 1) % penColors.size
+                    colorIndex = if (penColors.size > 1) (state.colorIndex + 1) % penColors.size else 0
                 )
             }
 
