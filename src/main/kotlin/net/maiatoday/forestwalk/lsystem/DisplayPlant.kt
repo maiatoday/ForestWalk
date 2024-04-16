@@ -44,7 +44,7 @@ fun lengthSeedling(isTree: Boolean, ground: Ground): Int = if (isTree) {
     when (ground) {
         Ground.Fore -> 5
         Ground.Middle -> 4
-        Ground.Back -> 4
+        Ground.Back -> 3
     }
 } else {
     6
@@ -52,9 +52,9 @@ fun lengthSeedling(isTree: Boolean, ground: Ground): Int = if (isTree) {
 
 fun startStrokeSeedling(isTree: Boolean, ground: Ground): Float = if (isTree) {
     when (ground) {
-        Ground.Fore -> 15.0f
+        Ground.Fore -> 16.0f
         Ground.Middle -> 10.0f
-        Ground.Back -> 9.0f
+        Ground.Back -> 8.0f
     }
 } else {
     8.0f
