@@ -25,6 +25,7 @@ class PlantBuilder {
         }
     }
 
+
     fun sprout(repeat: Int, probabilities: List<Double>) {
         require(probabilities.size >= rules.size) {
             "One probability for each rule. Fill the list with 1.0"

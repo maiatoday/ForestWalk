@@ -14,7 +14,9 @@ data class Seedling(
     val length: Int = 20,
     val startX: Int,
     val startY: Int,
-    val bluePrint: String
+    val bluePrint: String,
+    val isTree:Boolean,
+    val ground: Ground
 )
 
 fun colorSeedling(isTree: Boolean, ground: Ground): List<Color> =
