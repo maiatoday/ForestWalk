@@ -47,9 +47,6 @@ class PlantBuilder {
     internal fun buildPlant() = Plant(seed, rules, bluePrint, iterations)
 }
 
-fun plant(block: PlantBuilder.() -> Unit): Plant {
-    val pb = PlantBuilder()
-    pb.block()
-    return pb.buildPlant()
-}
+fun plant(block: PlantBuilder.() -> Unit): Plant =
+    PlantBuilder().apply(block).buildPlant()
 
